@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto&display=swap");
+
+:root {
+  --ingredient-color: #3282f7;
+  --appareils-color: #68d9a4;
+  --ustensiles-color: #ed6454;
+  --background-color-description: #e7e7e7;
+  --background-color-blank-img: #c7bebe;
+}
+
+:host,
+::before,
+::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  margin: 20px 100px;
+  padding: 0;
+}
+
+header {
+  display: flex;
+  margin: 30px auto 20px auto;
+  max-width: 300px;
+}
+
+img {
+  width: 100%;
+}
+
+.research {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--background-color-description);
+  padding: 15px 10px;
+  margin-bottom: 20px;
+}
+
+.researcher {
+  width: 95%;
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #000000;
+  opacity: 0.25;
+  border: none;
+  background-color: var(--background-color-description);
+  outline: none;
+}
+#filters {
+  display: flex;
+
+  column-gap: 20px;
+  font-family: "Lato";
+}
+#ingredients {
+  padding: 15px 10px;
+  border-radius: 5px;
+  background-color: var(--ingredient-color);
+  color: #ffffff;
+}
+#appareils {
+  padding: 15px 10px;
+  border-radius: 5px;
+  background-color: var(--appareils-color);
+  color: #ffffff;
+}
+#ustensiles {
+  padding: 15px 10px;
+  border-radius: 5px;
+  background-color: var(--ustensiles-color);
+  color: #ffffff;
+}
+
+#recipes-cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 55px;
+  gap: 50px;
+}
+.blank-image {
+  height: 180px;
+  background-color: var(--background-color-blank-img);
+}
+.ingredient-time {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.4rem;
+}
+
+.global-ingredient-description {
+  display: flex;
+}
+.recipe {
+  width: 30%;
+}
+.globale-ingredient-description {
+  display: flex;
+
+  padding: 1.4rem;
+  background-color: var(--background-color-description);
+  gap: 10px;
+  justify-content: space-between;
+}
+.ingredient-time {
+  background-color: var(--background-color-description);
+}
+
+.name-ingredient {
+  font-weight: 700;
+}
+span {
+  font-size: 12px;
+}
+.description-commentary {
+  font-size: 12px;
+}
+
+/* font-family: 'Lato', sans-serif;
+font-family: 'Roboto', sans-serif; */
+/* Recipes section - ARTICLES */
+p {
+  width: 200px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

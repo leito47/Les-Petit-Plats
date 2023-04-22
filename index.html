@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./css/index.css" />
+    <title>Les petits plats</title>
+  </head>
+  <body>
+    <header>
+      <img
+        class="logo-title"
+        src="./images/logo.png"
+        alt="logo les petits plats"
+      />
+    </header>
+    <main>
+      <section id="research" class="research">
+        <input class="researcher" placeholder="Rechercher une recette" />
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </section>
+      <section id="tag"></section>
+      <section id="filters">
+        <div id="ingredients">
+          <span>Ingrédients</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div id="appareils">
+          <span>Appareils</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div id="ustensiles">
+          <span>Ustensiles</span>
+          <i class="fa-solid fa-chevron-down"></i>
+          <!-- <i class="fa-solid fa-chevron-up"></i> -->
+        </div>
+      </section>
+      <section id="recipes-cards"></section>
+    </main>
+    <script type="module" src="./data/recipes.js"></script>
+    <script type="module" src="./scripts/pages/index.js"></script>
+    <script type="module" src="./scripts/pages/barSearch.js"></script>
+  </body>
+</html>
