@@ -1,4 +1,5 @@
 import { recipes } from "/data/recipes.js";
+let getRecipesByName = [];
 
 function displayDataRecipeAll(recipes) {
   const sectionRecipes = document.getElementById("recipes-cards");
@@ -83,5 +84,165 @@ function displayDataRecipeAll(recipes) {
     divTime.appendChild(spanTextTime);
   });
 }
-
 displayDataRecipeAll(recipes);
+
+const barResearch = () => {
+  const inputBarResearch = document.querySelector(".researcher");
+  const normalizeString = (str) => {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  };
+
+  inputBarResearch.addEventListener("keyup", (e) => {
+    let inputTargetResearch = normalizeString(e.target.value)
+      .toLowerCase()
+      .trim();
+
+    if (inputTargetResearch.length > 2) {
+      getRecipesByName = recipes.filter(
+        (recipe) =>
+          normalizeString(recipe.name)
+            .toLowerCase()
+            .includes(inputTargetResearch.toLowerCase()) ||
+          recipe.ingredients.some((ingredient) =>
+            normalizeString(ingredient.ingredient)
+              .toLowerCase()
+              .includes(inputTargetResearch.toLowerCase())
+          ) ||
+          normalizeString(recipe.appliance)
+            .toLowerCase()
+            .includes(inputTargetResearch.toLowerCase()) ||
+          recipe.ustensils.some((ustensil) =>
+            normalizeString(ustensil)
+              .toLowerCase()
+              .includes(inputTargetResearch.toLowerCase())
+          )
+      );
+      displayDataRecipeAll(getRecipesByName);
+
+      /* Show or Hide filter Element */
+      filterIngredients(getRecipesByName);
+    } else {
+      displayDataRecipeAll(recipes);
+    }
+  });
+};
+barResearch();
+
+const filterIngredients = (getRecipesByName) => {
+  const inputBarResearch = document.querySelector(".researcher");
+  const filteringredients = document.querySelector(".ingredient");
+  const inputFilterIngredients = document.createElement("div");
+  const sectionContainerIngredient = document.querySelector(
+    ".container-ingredient"
+  );
+  inputFilterIngredients.setAttribute("class", "ingredient-hidden");
+
+  const inputIngredient = document.createElement("input");
+  inputIngredient.setAttribute("class", "ingredients");
+  inputIngredient.setAttribute("placeholder", "Rechercher un ingrédient");
+
+  const arrowUp = document.createElement("i");
+  arrowUp.setAttribute("class", "fa-solid fa-chevron-up arrow");
+  inputFilterIngredients.style.display = "none";
+  let listIngredientRecipe = document.createElement("div");
+  listIngredientRecipe.setAttribute("class", "liste-ingredients");
+
+  /* Clear the element container of ingredient filter */
+  // const htmlIngredientInput = Array.from(
+  //   document.querySelectorAll(".ingredients")
+  // );
+
+  // const htmlIngredientChevron = Array.from(
+  //   document.querySelectorAll(".ingredient-hidden")
+  // );
+
+  // const htmlIngredientData = Array.from(
+  //   document.querySelectorAll(".liste-ingredients")
+  // );
+
+  // if (htmlIngredientData.length > 0) {
+  //   htmlIngredientData.forEach((el) => {
+  //     el.remove();
+  //   });
+  // }
+
+  // if (htmlIngredientInput.length > 1) {
+  //   htmlIngredientInput.forEach((el) => {
+  //     el.remove();
+  //   });
+  // }
+
+  // if (htmlIngredientChevron.length > 1) {
+  //   htmlIngredientChevron.forEach((el) => {
+  //     el.remove();
+  //   });
+  // }
+
+  sectionContainerIngredient.appendChild(inputFilterIngredients);
+  inputFilterIngredients.appendChild(inputIngredient);
+  inputFilterIngredients.appendChild(listIngredientRecipe);
+  inputIngredient.insertAdjacentElement("afterend", arrowUp);
+
+  filteringredients.addEventListener("click", () => {
+    filteringredients.style.display = "none";
+    inputFilterIngredients.style.display = "block";
+    listIngredientRecipe.innerHTML = "";
+    let allIngredients = new Set();
+    getRecipesByName.forEach((recipe) => {
+      recipe.ingredients.forEach((ingredient) => {
+        allIngredients.add(ingredient.ingredient);
+      });
+    });
+
+    const ingredientBarResearchRecipes = new Set();
+    Array.from(document.querySelectorAll(".name-ingredient")).forEach(
+      (element) => {
+        ingredientBarResearchRecipes.add(element.textContent);
+      }
+    );
+    allIngredients.forEach((ingredient) => {
+      let liIngredient = document.createElement("li");
+      liIngredient.setAttribute("class", "li-ingredient");
+      liIngredient.textContent = ingredient;
+      listIngredientRecipe.appendChild(liIngredient);
+    });
+
+    let sortedList = Array.from(listIngredientRecipe.children).sort((a, b) =>
+      a.textContent.localeCompare(b.textContent)
+    );
+
+    sortedList.forEach((liIngredient) => {
+      listIngredientRecipe.appendChild(liIngredient);
+    });
+  });
+
+  inputIngredient.addEventListener("input", () => {
+    let value = inputIngredient.value.toLowerCase().trim();
+
+    Array.from(listIngredientRecipe.children).forEach((liIngredient) => {
+      let ingredientText = liIngredient.textContent.toLowerCase();
+
+      if (ingredientText.includes(value)) {
+        liIngredient.style.display = "block";
+      } else {
+        liIngredient.style.display = "none";
+      }
+    });
+  });
+
+  arrowUp.addEventListener("click", () => {
+    filteringredients.style.display = "block";
+    inputFilterIngredients.style.display = "none";
+  });
+};
+filterIngredients(recipes);
+
+const tagResearch = () => {};
+Array.from(document.querySelectorAll(".liste-ingredients")).forEach(
+  (element) => {
+    element.addEventListener("click", function (e) {
+      console.log(e.target.textContent);
+    });
+  }
+);
+tagResearch();

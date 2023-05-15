@@ -24,29 +24,38 @@
     </header>
     <main>
       <section id="research" class="research">
-        <input class="researcher" placeholder="Rechercher une recette" />
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <input
+          class="researcher"
+          id="researcher"
+          placeholder="Rechercher une recette"
+        />
+        <i class="fa-solid fa-magnifying-glass loupe"></i>
       </section>
       <section id="tag"></section>
       <section id="filters">
-        <div id="ingredients">
-          <span>Ingrédients</span>
-          <i class="fa-solid fa-chevron-down"></i>
+        <section class="container-ingredient" style="width: unset">
+          <div id="ingredients" class="ingredient" style="display: block">
+            <span>Ingrédients</span>
+            <i class="fa-solid fa-chevron-down arrow"></i>
+          </div>
+        </section>
+        <div style="width: unset">
+          <div id="appareils">
+            <span>Appareils</span>
+            <i class="fa-solid fa-chevron-down arrow"></i>
+          </div>
         </div>
-        <div id="appareils">
-          <span>Appareils</span>
-          <i class="fa-solid fa-chevron-down"></i>
-        </div>
-        <div id="ustensiles">
-          <span>Ustensiles</span>
-          <i class="fa-solid fa-chevron-down"></i>
-          <!-- <i class="fa-solid fa-chevron-up"></i> -->
+        <div style="width: unset">
+          <div id="ustensiles">
+            <span>Ustensiles</span>
+            <i class="fa-solid fa-chevron-down arrow"></i>
+            <!-- <i class="fa-solid fa-chevron-up"></i> -->
+          </div>
         </div>
       </section>
       <section id="recipes-cards"></section>
     </main>
     <script type="module" src="./data/recipes.js"></script>
     <script type="module" src="./scripts/pages/index.js"></script>
-    <script type="module" src="./scripts/pages/barSearch.js"></script>
   </body>
 </html>
