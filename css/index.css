@@ -68,13 +68,13 @@ img {
   background-color: var(--ingredient-color);
   color: #ffffff;
 }
-#appareils {
+#appliance {
   padding: 15px 10px;
   border-radius: 5px;
   background-color: var(--appareils-color);
   color: #ffffff;
 }
-#ustensiles {
+#ustensils {
   padding: 15px 10px;
   border-radius: 5px;
   background-color: var(--ustensiles-color);
@@ -137,7 +137,8 @@ p {
   overflow: hidden;
 }
 
-.liste-ingredients {
+.liste-ingredients,
+.liste-appliance {
   display: grid;
   list-style: none;
   grid-template-columns: repeat(3, 1fr);
@@ -148,22 +149,40 @@ p {
   line-height: 25px;
   cursor: pointer;
 }
-.ingredients {
+.ingredients,
+.input-appliance {
   background-color: var(--ingredient-color);
   border: none;
   color: #ffffff;
 }
-.ingredients::placeholder {
+.appliance,
+.input-appliance {
+  background-color: var(--appareils-color);
+}
+.ustensils {
+  background-color: var(--ustensils-color);
+}
+.ingredients::placeholder,
+.input-appliance::placeholder,
+.input-ustensil::placeholder {
   color: #ffffff;
 }
 .fa-solid {
   color: #ffffff;
 }
-.ingredient-hidden {
+.ingredient-hidden,
+.appliance-hidden,
+.ustensils-hidden {
   padding: 15px 10px;
   border-radius: 5px;
   background-color: var(--ingredient-color);
   color: #ffffff;
+}
+.appliance-hidden {
+  background-color: var(--appareils-color);
+}
+.ustensils-hidden {
+  background-color: var(--ustensils-color);
 }
 .loupe {
   color: #000000;
