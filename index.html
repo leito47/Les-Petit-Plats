@@ -31,12 +31,13 @@
         />
         <i class="fa-solid fa-magnifying-glass loupe"></i>
       </section>
-      <section id="tag"></section>
-      <section id="filters">
+      <div id="error-message"></div>
+      <ul id="tag" class="tag"></ul>
+      <section id="filters" class="filters">
         <section class="container-ingredient" style="width: unset">
-          <div id="ingredients" class="ingredient" style="display: block">
+          <div id="ingredients" class="ingredients" style="display: block">
             <span>Ingrédients</span>
-            <i class="fa-solid fa-chevron-down"></i>
+            <i class="fa-solid fa-chevron-down arrow"></i>
           </div>
         </section>
         <section class="container-appliance" style="width: unset">
@@ -52,7 +53,7 @@
           </div>
         </section>
       </section>
-      <section id="recipes-cards"></section>
+      <section id="recipes-cards" class="recipes-cards"></section>
     </main>
     <script type="module" src="./data/recipes.js"></script>
     <script type="module" src="./scripts/pages/index.js"></script>

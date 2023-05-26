@@ -52,6 +52,7 @@ const displayDataRecipeAll = (recipes) => {
       nameIngredient.setAttribute("class", "name-ingredient");
 
       let quantityIngredient = document.createElement("span");
+      quantityIngredient.setAttribute("class", "ingredient-quantity");
       nameIngredient.textContent = ingredientRecipe.ingredient + ":" + " ";
       quantityIngredient.textContent = ingredientRecipe.unit
         ? `${ingredientRecipe.quantity} ${ingredientRecipe.unit}`
@@ -65,7 +66,7 @@ const displayDataRecipeAll = (recipes) => {
     let divDescription = document.createElement("div");
     divDescription.setAttribute("class", "description-recipe");
     let descriptionRecipes = document.createElement("p");
-    descriptionRecipes.setAttribute("class", "descrption-commentary");
+    descriptionRecipes.setAttribute("class", "description-commentary");
     descriptionRecipes.textContent = recipe.description;
 
     // Add element in DOM
@@ -86,11 +87,34 @@ const displayDataRecipeAll = (recipes) => {
 };
 displayDataRecipeAll(recipes);
 
+//error message
+const displayErrorMessage = (message) => {
+  const errorMessageContainer = document.querySelector("#error-message");
+  errorMessageContainer.innerHTML = "";
+  errorMessageContainer.classList.add("show-error-message");
+  message = document.createElement("p");
+  message.innerHTML =
+    "Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc.";
+
+  errorMessageContainer.appendChild(message);
+};
+const hideErrorMessage = () => {
+  const errorMessageContainer = document.querySelector("#error-message");
+  errorMessageContainer.innerHTML = "";
+  errorMessageContainer.classList.remove("show-error-message");
+};
+
 const barResearch = () => {
   const inputBarResearch = document.querySelector(".researcher");
+
   const normalizeString = (str) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   };
+  inputBarResearch.addEventListener("focus", () => {
+    closeFilterIngredient();
+    closeFilterAppliance();
+    closeFilterUstensils();
+  });
 
   inputBarResearch.addEventListener("keyup", (e) => {
     let inputTargetResearch = normalizeString(e.target.value)
@@ -117,12 +141,14 @@ const barResearch = () => {
               .includes(inputTargetResearch.toLowerCase())
           )
       );
-      displayDataRecipeAll(getRecipesByName);
-
-      /* Show or Hide filter Element */
-      // filterIngredients();
+      if (getRecipesByName.length > 0) {
+        displayDataRecipeAll(getRecipesByName);
+      } else {
+        displayErrorMessage();
+      }
     } else {
       displayDataRecipeAll(recipes);
+      hideErrorMessage();
     }
   });
 };
@@ -133,7 +159,7 @@ const inputIngredient = document.createElement("input");
 inputIngredient.setAttribute("class", "ingredients");
 inputIngredient.setAttribute("placeholder", "Rechercher un ingrédient");
 
-const filteringredients = document.querySelector(".ingredient");
+const filteringredients = document.querySelector(".ingredients");
 const inputFilterIngredients = document.createElement("div");
 const sectionContainerIngredient = document.querySelector(
   ".container-ingredient"
@@ -154,19 +180,22 @@ inputIngredient.insertAdjacentElement("afterend", arrowUpFilterIngredient);
 // function filterIngredient
 const filterIngredients = () => {
   filteringredients.addEventListener("click", () => {
+    closeFilterAppliance();
+    closeFilterUstensils();
     filteringredients.style.display = "none";
     inputFilterIngredients.style.display = "block";
     listIngredientRecipe.innerHTML = "";
 
-    let ingredientBarResearchRecipes = new Set();
+    let ingredientBarResearchRecipes = [];
     Array.from(document.querySelectorAll(".name-ingredient")).forEach(
       (element) => {
         let ingredientName = element.textContent.replace(/:/g, "").trim();
 
-        if (!ingredientBarResearchRecipes.has(ingredientName)) {
-          ingredientBarResearchRecipes.add(ingredientName);
+        if (!ingredientBarResearchRecipes.includes(ingredientName)) {
+          ingredientBarResearchRecipes.push(ingredientName);
 
           let liIngredient = document.createElement("li");
+
           liIngredient.textContent = ingredientName;
 
           listIngredientRecipe.appendChild(liIngredient);
@@ -184,10 +213,15 @@ const filterIngredients = () => {
   });
 
   inputIngredient.addEventListener("input", () => {
-    let value = inputIngredient.value.toLowerCase().trim();
+    const normalizeString = (str) => {
+      return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    };
+    let value = normalizeString(inputIngredient.value).toLowerCase().trim();
 
     Array.from(listIngredientRecipe.children).forEach((liIngredient) => {
-      let ingredientText = liIngredient.textContent.toLowerCase();
+      let ingredientText = normalizeString(
+        liIngredient.textContent
+      ).toLowerCase();
 
       if (ingredientText.includes(value)) {
         liIngredient.style.display = "block";
@@ -200,13 +234,49 @@ const filterIngredients = () => {
 filterIngredients();
 
 //function close filterIngredient
-arrowUpFilterIngredient.addEventListener("click", () => {
+const closeFilterIngredient = () => {
   filteringredients.style.display = "block";
   inputFilterIngredients.style.display = "none";
-});
+};
+arrowUpFilterIngredient.addEventListener("click", closeFilterIngredient);
 
+const tagResearchIngredients = () => {
+  Array.from(document.querySelectorAll(".liste-ingredients ")).forEach(
+    (element) => {
+      element.addEventListener("click", function (e) {
+        const tagSection = document.querySelector(".tag");
+        let tagIngredientLi = document.createElement("li");
+        tagIngredientLi.setAttribute("class", "tag-ingredient");
+        let spanIngredient = document.createElement("span");
+        let btnFermetureTag = document.createElement("i");
+        btnFermetureTag.setAttribute("class", "fa-regular fa-circle-xmark");
+        tagIngredientLi.textContent = e.target.textContent;
+        let tagDisplayIngredient = tagIngredientLi.textContent.toLowerCase();
+
+        tagSection.appendChild(tagIngredientLi);
+        tagIngredientLi.appendChild(spanIngredient);
+        tagIngredientLi.appendChild(btnFermetureTag);
+        console.log(tagDisplayIngredient);
+
+        btnFermetureTag.addEventListener("click", () => {
+          tagIngredientLi.remove();
+        });
+        //display ingredient with tag
+
+        let tagFilterForIngredient = recipes.map((recipe) =>
+          recipe.ingredients.map((ingredient) =>
+            ingredient.ingredient.toLowerCase().includes(tagDisplayIngredient)
+          )
+        );
+
+        console.log(tagFilterForIngredient);
+      });
+    }
+  );
+};
+tagResearchIngredients();
 //add element DOM appliance
-// const nameRecipesForAppliance = document.querySelector(".title-recipe");
+
 const inputAppliance = document.createElement("input");
 inputAppliance.setAttribute("class", "input-appliance");
 inputAppliance.setAttribute("placeholder", "Rechercher un appareil");
@@ -221,7 +291,7 @@ inputFilterAppliance.style.display = "none";
 const arrowUpFilterAppliance = document.createElement("i");
 arrowUpFilterAppliance.setAttribute("class", "fa-solid fa-chevron-up arrow");
 
-let listApplianceRecipe = document.createElement("div");
+const listApplianceRecipe = document.createElement("div");
 listApplianceRecipe.setAttribute("class", "liste-appliance");
 
 sectionContainerAppliance.appendChild(inputFilterAppliance);
@@ -229,49 +299,228 @@ inputFilterAppliance.appendChild(inputAppliance);
 inputFilterAppliance.appendChild(listApplianceRecipe);
 inputAppliance.insertAdjacentElement("afterend", arrowUpFilterAppliance);
 
-// function filterIngredient
+// function filterAppliance
 const filterAppliances = () => {
   filterAppliance.addEventListener("click", () => {
+    closeFilterIngredient();
+    closeFilterUstensils();
     filterAppliance.style.display = "none";
     inputFilterAppliance.style.display = "block";
     listApplianceRecipe.innerHTML = "";
 
-    let applianceBarResearchRecipes = new Set();
+    let applianceBarResearchRecipes = [];
     Array.from(document.querySelectorAll(".title-recipe")).forEach(
       (element) => {
-        let nameRecipeForAppliance = element.textContent.toLocaleLowerCase();
-        console.log(nameRecipeForAppliance);
-        let filterAppliance = recipes.filter(
+        let nameRecipeForAppliance = element.textContent
+          .toLocaleLowerCase()
+          .trim();
+
+        let filterForAppliance = recipes.filter(
           (recipe) => recipe.name.toLowerCase() === nameRecipeForAppliance
         );
 
-        let applianceName = filterAppliance.map((recipe) => recipe.appliance);
-        if (!applianceBarResearchRecipes.has(applianceName)) {
-          applianceBarResearchRecipes.add(applianceName);
+        let applianceName = filterForAppliance.map(
+          (recipe) => recipe.appliance
+        );
 
-          let liAppliance = document.createElement("li");
-          liAppliance.textContent = applianceName;
-
-          listApplianceRecipe.appendChild(liAppliance);
+        if (applianceBarResearchRecipes.indexOf(applianceName[0]) === -1) {
+          applianceBarResearchRecipes.push(applianceName[0]);
         }
       }
     );
+
+    applianceBarResearchRecipes.forEach((el) => {
+      let liAppliance = document.createElement("li");
+      liAppliance.textContent = el;
+      listApplianceRecipe.appendChild(liAppliance);
+    });
+
+    let sortedListAppliance = Array.from(listApplianceRecipe.children).sort(
+      (a, b) => a.textContent.localeCompare(b.textContent)
+    );
+
+    sortedListAppliance.forEach((liAppliance) => {
+      listApplianceRecipe.appendChild(liAppliance);
+    });
+  });
+
+  inputAppliance.addEventListener("input", () => {
+    const normalizeString = (str) => {
+      return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    };
+    let value = normalizeString(inputAppliance.value).toLowerCase().trim();
+
+    Array.from(listApplianceRecipe.children).forEach((liAppliance) => {
+      let applianceText = normalizeString(
+        liAppliance.textContent
+      ).toLowerCase();
+
+      if (applianceText.includes(value)) {
+        liAppliance.style.display = "block";
+      } else {
+        liAppliance.style.display = "none";
+      }
+    });
   });
 };
+
 filterAppliances();
 
 //function close filterAppliance
-arrowUpFilterAppliance.addEventListener("click", () => {
+const closeFilterAppliance = () => {
   filterAppliance.style.display = "block";
   inputFilterAppliance.style.display = "none";
-});
+};
+arrowUpFilterAppliance.addEventListener("click", closeFilterAppliance);
+const tagResearchAppliance = () => {
+  Array.from(document.querySelectorAll(".liste-appliance ")).forEach(
+    (element) => {
+      element.addEventListener("click", function (e) {
+        const tagSection = document.querySelector(".tag");
+        let tagApplianceLi = document.createElement("li");
+        tagApplianceLi.setAttribute("class", "tag-appliance");
+        let spanAppliance = document.createElement("span");
+        let btnFermetureTag = document.createElement("i");
+        btnFermetureTag.setAttribute("class", "fa-regular fa-circle-xmark");
+        tagApplianceLi.textContent = e.target.textContent;
+        let tagDisplayAppliance = tagApplianceLi.textContent.toLowerCase();
+        tagApplianceLi.textContent.toLocaleLowerCase();
+        tagSection.appendChild(tagApplianceLi);
+        tagApplianceLi.appendChild(spanAppliance);
+        tagApplianceLi.appendChild(btnFermetureTag);
+        console.log(tagApplianceLi.textContent);
+        btnFermetureTag.addEventListener("click", () => {
+          tagApplianceLi.remove();
+        });
+        //display ingredient with tag
+        let tagFilterForIngredient = [];
+        tagFilterForIngredient = recipes.filter((recipe) => recipe.ingredient);
+        console.log("tagflteringredient", recipes);
+        // if(tagDisplayIngredient.includes)
+      });
+    }
+  );
+};
+tagResearchAppliance();
 
-const tagResearch = () => {};
-Array.from(
-  document.querySelectorAll(".liste-ingredients .liste-appliance")
-).forEach((element) => {
-  element.addEventListener("click", function (e) {
-    console.log(e.target.textContent);
+//add element DOM ustensil
+
+const inputUstensils = document.createElement("input");
+inputUstensils.setAttribute("class", "input-ustensils");
+inputUstensils.setAttribute("placeholder", "Rechercher un ustensile");
+
+const filterUstensils = document.getElementById("ustensils");
+const inputFilterUstensils = document.createElement("div");
+const sectionContainerUstensils = document.querySelector(
+  ".container-ustensils"
+);
+inputFilterUstensils.setAttribute("class", "ustensils-hidden");
+inputFilterUstensils.style.display = "none";
+const arrowUpFilterUstensils = document.createElement("i");
+arrowUpFilterUstensils.setAttribute("class", "fa-solid fa-chevron-up arrow");
+
+let listUstensilsRecipe = document.createElement("div");
+listUstensilsRecipe.setAttribute("class", "liste-ustensils");
+
+sectionContainerUstensils.appendChild(inputFilterUstensils);
+inputFilterUstensils.appendChild(inputUstensils);
+inputFilterUstensils.appendChild(listUstensilsRecipe);
+inputUstensils.insertAdjacentElement("afterend", arrowUpFilterUstensils);
+
+// function filterUstensils
+const filterUstensiles = () => {
+  filterUstensils.addEventListener("click", () => {
+    closeFilterIngredient();
+    closeFilterAppliance();
+    filterUstensils.style.display = "none";
+    inputFilterUstensils.style.display = "block";
+    listUstensilsRecipe.innerHTML = "";
+
+    let ustensilsBarResearchRecipes = [];
+    Array.from(document.querySelectorAll(".title-recipe")).forEach(
+      (element) => {
+        let nameRecipeForUstensils = element.textContent
+          .toLocaleLowerCase()
+          .trim();
+
+        let filterUstensils = recipes.filter(
+          (recipe) => recipe.name.toLowerCase() === nameRecipeForUstensils
+        );
+        filterUstensils.forEach((element) => {
+          ustensilsBarResearchRecipes.push(...element.ustensils);
+        });
+
+        // const flatUstensils = [...new Set(ustensilsBarResearchRecipes)];
+      }
+    );
+
+    let liUstensils = document.createElement("li");
+    liUstensils.textContent = ustensilsBarResearchRecipes;
+    listUstensilsRecipe.appendChild(liUstensils);
+    // }
+    let sortedListUstensils = Array.from(listUstensilsRecipe.children).sort(
+      (a, b) => a.textContent.localeCompare(b.textContent)
+    );
+
+    sortedListUstensils.forEach((liUstensils) => {
+      listUstensilsRecipe.appendChild(liUstensils);
+    });
   });
-});
-tagResearch();
+  inputUstensils.addEventListener("input", () => {
+    const normalizeString = (str) => {
+      return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    };
+    let value = normalizeString(inputUstensils.value).toLowerCase().trim();
+
+    Array.from(listUstensilsRecipe.children).forEach((liUstensils) => {
+      let ustensilsText = normalizeString(
+        liUstensils.textContent
+      ).toLowerCase();
+
+      if (ustensilsText.includes(value)) {
+        liUstensils.style.display = "block";
+      } else {
+        liUstensils.style.display = "none";
+      }
+    });
+  });
+};
+filterUstensiles();
+
+//function close filterUstensils
+const closeFilterUstensils = () => {
+  filterUstensils.style.display = "block";
+  inputFilterUstensils.style.display = "none";
+};
+arrowUpFilterUstensils.addEventListener("click", closeFilterUstensils);
+
+const tagResearchUstensils = () => {
+  Array.from(document.querySelectorAll(".liste-ustensils ")).forEach(
+    (element) => {
+      element.addEventListener("click", function (e) {
+        const tagSection = document.querySelector(".tag");
+        let tagUstensilsLi = document.createElement("li");
+        tagUstensilsLi.setAttribute("class", "tag-ustensils");
+        let spanUstensils = document.createElement("span");
+        let btnFermetureTag = document.createElement("i");
+        btnFermetureTag.setAttribute("class", "fa-regular fa-circle-xmark");
+        tagUstensilsLi.textContent = e.target.textContent;
+        let tagDisplayUstensils = tagUstensilsLi.textContent.toLowerCase();
+        tagUstensilsLi.textContent.toLocaleLowerCase();
+        tagSection.appendChild(tagUstensilsLi);
+        tagUstensilsLi.appendChild(spanUstensils);
+        tagUstensilsLi.appendChild(btnFermetureTag);
+        console.log(tagUstensilsLi.textContent);
+        btnFermetureTag.addEventListener("click", () => {
+          tagUstensilsLi.remove();
+        });
+        //display ingredient with tag
+        let tagFilterForIngredient = [];
+        tagFilterForIngredient = recipes.filter((recipe) => recipe.ingredient);
+        console.log("tagflteringredient", recipes);
+        // if(tagDisplayIngredient.includes)
+      });
+    }
+  );
+};
+tagResearchUstensils();
