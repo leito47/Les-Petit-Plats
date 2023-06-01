@@ -1,6 +1,8 @@
 import { recipes } from "/data/recipes.js";
 let getRecipesByName = [];
 
+let tagFilterForAppliance = [];
+let tagFilterForUstensils = [];
 const displayDataRecipeAll = (recipes) => {
   const sectionRecipes = document.getElementById("recipes-cards");
   // Clear any existing HTML in the section
@@ -141,6 +143,7 @@ const barResearch = () => {
               .includes(inputTargetResearch.toLowerCase())
           )
       );
+
       if (getRecipesByName.length > 0) {
         displayDataRecipeAll(getRecipesByName);
       } else {
@@ -148,6 +151,7 @@ const barResearch = () => {
       }
     } else {
       displayDataRecipeAll(recipes);
+
       hideErrorMessage();
     }
   });
@@ -239,42 +243,69 @@ const closeFilterIngredient = () => {
   inputFilterIngredients.style.display = "none";
 };
 arrowUpFilterIngredient.addEventListener("click", closeFilterIngredient);
-
+let counterTag = 0;
 const tagResearchIngredients = () => {
+  let tagFilterForIngredient = [];
   Array.from(document.querySelectorAll(".liste-ingredients ")).forEach(
     (element) => {
       element.addEventListener("click", function (e) {
         const tagSection = document.querySelector(".tag");
         let tagIngredientLi = document.createElement("li");
         tagIngredientLi.setAttribute("class", "tag-ingredient");
+        counterTag++;
+
         let spanIngredient = document.createElement("span");
         let btnFermetureTag = document.createElement("i");
         btnFermetureTag.setAttribute("class", "fa-regular fa-circle-xmark");
-        tagIngredientLi.textContent = e.target.textContent;
+        tagIngredientLi.textContent = e.target.textContent.toLowerCase();
         let tagDisplayIngredient = tagIngredientLi.textContent.toLowerCase();
+        const tags = Array.from(document.querySelectorAll(".tag-ingredient"));
 
         tagSection.appendChild(tagIngredientLi);
         tagIngredientLi.appendChild(spanIngredient);
         tagIngredientLi.appendChild(btnFermetureTag);
-        console.log(tagDisplayIngredient);
+        closeFilterIngredient();
 
         btnFermetureTag.addEventListener("click", () => {
           tagIngredientLi.remove();
+          counterTag--;
+          updateDisplayTagIngredient();
         });
+
         //display ingredient with tag
 
-        let tagFilterForIngredient = recipes.map((recipe) =>
-          recipe.ingredients.map((ingredient) =>
+        tagFilterForIngredient = recipes.filter((recipe) =>
+          recipe.ingredients.some((ingredient) =>
             ingredient.ingredient.toLowerCase().includes(tagDisplayIngredient)
           )
         );
-
-        console.log(tagFilterForIngredient);
+        displayDataRecipeAll(tagFilterForIngredient);
       });
+
+      let updateDisplayTagIngredient = () => {
+        const tagsIngredients = Array.from(
+          document.querySelectorAll(".tag-ingredient")
+        );
+        if (counterTag === 0) {
+          displayDataRecipeAll(recipes);
+        } else {
+          tagFilterForIngredient = recipes.filter((recipe) =>
+            tagsIngredients.some((tag) =>
+              recipe.ingredients.some((ingredient) =>
+                ingredient.ingredient
+                  .toLowerCase()
+                  .includes(tag.textContent.toLowerCase())
+              )
+            )
+          );
+          displayDataRecipeAll(tagFilterForIngredient);
+        }
+      };
     }
   );
 };
 tagResearchIngredients();
+
 //add element DOM appliance
 
 const inputAppliance = document.createElement("input");
@@ -379,6 +410,7 @@ const tagResearchAppliance = () => {
         const tagSection = document.querySelector(".tag");
         let tagApplianceLi = document.createElement("li");
         tagApplianceLi.setAttribute("class", "tag-appliance");
+        counterTag++;
         let spanAppliance = document.createElement("span");
         let btnFermetureTag = document.createElement("i");
         btnFermetureTag.setAttribute("class", "fa-regular fa-circle-xmark");
@@ -388,16 +420,37 @@ const tagResearchAppliance = () => {
         tagSection.appendChild(tagApplianceLi);
         tagApplianceLi.appendChild(spanAppliance);
         tagApplianceLi.appendChild(btnFermetureTag);
-        console.log(tagApplianceLi.textContent);
+        closeFilterAppliance();
         btnFermetureTag.addEventListener("click", () => {
           tagApplianceLi.remove();
+          counterTag--;
+          updateDisplayTagAppliance();
         });
-        //display ingredient with tag
-        let tagFilterForIngredient = [];
-        tagFilterForIngredient = recipes.filter((recipe) => recipe.ingredient);
-        console.log("tagflteringredient", recipes);
-        // if(tagDisplayIngredient.includes)
+
+        //display appliance with tag
+        tagFilterForAppliance = recipes.filter((recipe) =>
+          recipe.appliance.toLowerCase().includes(tagDisplayAppliance)
+        );
+        displayDataRecipeAll(tagFilterForAppliance);
       });
+      let updateDisplayTagAppliance = () => {
+        const tagsAppliance = Array.from(
+          document.querySelectorAll(".tag-appliance")
+        );
+        if (counterTag === 0) {
+          displayDataRecipeAll(recipes);
+        } else {
+          tagFilterForAppliance = recipes.filter((recipe) =>
+            tagsAppliance.some((tag) =>
+              recipe.appliance
+                .toLowerCase()
+                .includes(tag.textContent.toLowerCase())
+            )
+          );
+
+          displayDataRecipeAll(tagFilterForAppliance);
+        }
+      };
     }
   );
 };
@@ -436,7 +489,8 @@ const filterUstensiles = () => {
     inputFilterUstensils.style.display = "block";
     listUstensilsRecipe.innerHTML = "";
 
-    let ustensilsBarResearchRecipes = [];
+    let ustensilsBarResearchRecipes = new Set();
+
     Array.from(document.querySelectorAll(".title-recipe")).forEach(
       (element) => {
         let nameRecipeForUstensils = element.textContent
@@ -446,18 +500,25 @@ const filterUstensiles = () => {
         let filterUstensils = recipes.filter(
           (recipe) => recipe.name.toLowerCase() === nameRecipeForUstensils
         );
-        filterUstensils.forEach((element) => {
-          ustensilsBarResearchRecipes.push(...element.ustensils);
-        });
 
-        // const flatUstensils = [...new Set(ustensilsBarResearchRecipes)];
+        filterUstensils.map((recipe) =>
+          recipe.ustensils.forEach((ustensilsName) => {
+            ustensilsBarResearchRecipes.add(
+              ustensilsName.charAt(0).toUpperCase() +
+                ustensilsName.slice(1).toLowerCase()
+            );
+          })
+        );
       }
     );
+    listUstensilsRecipe.innerHTML = "";
 
-    let liUstensils = document.createElement("li");
-    liUstensils.textContent = ustensilsBarResearchRecipes;
-    listUstensilsRecipe.appendChild(liUstensils);
-    // }
+    ustensilsBarResearchRecipes.forEach((ustensil) => {
+      let liUstensils = document.createElement("li");
+      liUstensils.textContent = ustensil;
+      listUstensilsRecipe.appendChild(liUstensils);
+    });
+
     let sortedListUstensils = Array.from(listUstensilsRecipe.children).sort(
       (a, b) => a.textContent.localeCompare(b.textContent)
     );
@@ -501,6 +562,7 @@ const tagResearchUstensils = () => {
         const tagSection = document.querySelector(".tag");
         let tagUstensilsLi = document.createElement("li");
         tagUstensilsLi.setAttribute("class", "tag-ustensils");
+        counterTag++;
         let spanUstensils = document.createElement("span");
         let btnFermetureTag = document.createElement("i");
         btnFermetureTag.setAttribute("class", "fa-regular fa-circle-xmark");
@@ -510,16 +572,40 @@ const tagResearchUstensils = () => {
         tagSection.appendChild(tagUstensilsLi);
         tagUstensilsLi.appendChild(spanUstensils);
         tagUstensilsLi.appendChild(btnFermetureTag);
-        console.log(tagUstensilsLi.textContent);
+
+        closeFilterUstensils();
         btnFermetureTag.addEventListener("click", () => {
           tagUstensilsLi.remove();
+          counterTag--;
+          updateDisplayTagUstensils();
         });
-        //display ingredient with tag
-        let tagFilterForIngredient = [];
-        tagFilterForIngredient = recipes.filter((recipe) => recipe.ingredient);
-        console.log("tagflteringredient", recipes);
-        // if(tagDisplayIngredient.includes)
+
+        //display ustensils with tag
+
+        tagFilterForUstensils = recipes.filter((recipe) =>
+          recipe.ustensils.includes(tagDisplayUstensils)
+        );
+
+        displayDataRecipeAll(tagFilterForUstensils);
       });
+
+      let updateDisplayTagUstensils = () => {
+        const tagsUstensils = Array.from(
+          document.querySelectorAll(".tag-ustensils")
+        );
+        if (counterTag === 0) {
+          displayDataRecipeAll(recipes);
+        } else {
+          tagFilterForUstensils = recipes.filter((recipe) =>
+            tagsUstensils.some((tag) =>
+              recipe.ustensils.some((ustensil) =>
+                ustensil.toLowerCase().includes(tag.textContent.toLowerCase())
+              )
+            )
+          );
+          displayDataRecipeAll(tagFilterForUstensils);
+        }
+      };
     }
   );
 };
