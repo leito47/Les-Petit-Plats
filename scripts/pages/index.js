@@ -98,35 +98,61 @@ const barResearch = () => {
       .trim();
 
     if (inputTargetResearch.length > 2) {
-      getRecipesByName = recipes.filter(
-        (recipe) =>
-          normalizeString(recipe.name)
-            .toLowerCase()
-            .includes(inputTargetResearch.toLowerCase()) ||
-          recipe.ingredients.some((ingredient) =>
-            normalizeString(ingredient.ingredient)
-              .toLowerCase()
-              .includes(inputTargetResearch.toLowerCase())
-          ) ||
-          normalizeString(recipe.appliance)
-            .toLowerCase()
-            .includes(inputTargetResearch.toLowerCase()) ||
-          recipe.ustensils.some((ustensil) =>
-            normalizeString(ustensil)
-              .toLowerCase()
-              .includes(inputTargetResearch.toLowerCase())
-          )
-      );
-      displayDataRecipeAll(getRecipesByName);
+    for (let i = 0; i < recipes.length; i++) {
+      let recipe = recipes[i];
+      let recipeName = normalizeString(recipe.name)
+        .toLowerCase();
 
-      /* Show or Hide filter Element */
-      filterIngredients(getRecipesByName);
-    } else {
-      displayDataRecipeAll(recipes);
+      if (recipeName.includes(inputTargetResearch)) {
+        getRecipesByName.push(recipe);
+      
+      }
+
+      let ingredients = recipe.ingredients;
+      for (let j = 0; j < ingredients.length; j++) {
+        let ingredient = ingredients[j].ingredient;
+        let normalizedIngredient = normalizeString(ingredient)
+          .toLowerCase();
+
+        if (normalizedIngredient.includes(inputTargetResearch)) {
+          getRecipesByName.push(recipe);
+     
+        }
+      }
+
+      let appliance = normalizeString(recipe.appliance)
+        .toLowerCase();
+      if (appliance.includes(inputTargetResearch)) {
+        getRecipesByName.push(recipe);
+        // continue;
+      }
+
+      let ustensils = recipe.ustensils;
+      for (let k = 0; k < ustensils.length; k++) {
+        let ustensil = ustensils[k];
+        let normalizedUstensil = normalizeString(ustensil)
+          .toLowerCase();
+
+        if (normalizedUstensil.includes(inputTargetResearch)) {
+          getRecipesByName.push(recipe);
+    
+        }
+      }
     }
-  });
+
+    if (getRecipesByName.length > 0) {
+      displayDataRecipeAll(getRecipesByName);
+    } else {
+      displayErrorMessage();
+    }
+  } else {
+    displayDataRecipeAll(recipes);
+    hideErrorMessage();
+  }
+});
 };
 barResearch();
+
 
 const filterIngredients = (getRecipesByName) => {
   const inputBarResearch = document.querySelector(".researcher");
@@ -147,36 +173,7 @@ const filterIngredients = (getRecipesByName) => {
   let listIngredientRecipe = document.createElement("div");
   listIngredientRecipe.setAttribute("class", "liste-ingredients");
 
-  /* Clear the element container of ingredient filter */
-  // const htmlIngredientInput = Array.from(
-  //   document.querySelectorAll(".ingredients")
-  // );
-
-  // const htmlIngredientChevron = Array.from(
-  //   document.querySelectorAll(".ingredient-hidden")
-  // );
-
-  // const htmlIngredientData = Array.from(
-  //   document.querySelectorAll(".liste-ingredients")
-  // );
-
-  // if (htmlIngredientData.length > 0) {
-  //   htmlIngredientData.forEach((el) => {
-  //     el.remove();
-  //   });
-  // }
-
-  // if (htmlIngredientInput.length > 1) {
-  //   htmlIngredientInput.forEach((el) => {
-  //     el.remove();
-  //   });
-  // }
-
-  // if (htmlIngredientChevron.length > 1) {
-  //   htmlIngredientChevron.forEach((el) => {
-  //     el.remove();
-  //   });
-  // }
+  
 
   sectionContainerIngredient.appendChild(inputFilterIngredients);
   inputFilterIngredients.appendChild(inputIngredient);
@@ -246,3 +243,4 @@ Array.from(document.querySelectorAll(".liste-ingredients")).forEach(
   }
 );
 tagResearch();
+
