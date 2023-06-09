@@ -1,8 +1,8 @@
 import { recipes } from "/data/recipes.js";
 let getRecipesByName = [];
-
-let tagFilterForAppliance = [];
-let tagFilterForUstensils = [];
+// let tagFilterForIngredient = [];
+// let tagFilterForAppliance = [];
+// let tagFilterForUstensils = [];
 const displayDataRecipeAll = (recipes) => {
   const sectionRecipes = document.getElementById("recipes-cards");
   // Clear any existing HTML in the section
@@ -170,6 +170,8 @@ const sectionContainerIngredient = document.querySelector(
 );
 inputFilterIngredients.setAttribute("class", "ingredient-hidden");
 inputFilterIngredients.style.display = "none";
+const divIngredientHidden = document.createElement("div");
+divIngredientHidden.setAttribute("class", "div-ingredient-hidden");
 const arrowUpFilterIngredient = document.createElement("i");
 arrowUpFilterIngredient.setAttribute("class", "fa-solid fa-chevron-up arrow");
 
@@ -177,7 +179,8 @@ let listIngredientRecipe = document.createElement("div");
 listIngredientRecipe.setAttribute("class", "liste-ingredients");
 
 sectionContainerIngredient.appendChild(inputFilterIngredients);
-inputFilterIngredients.appendChild(inputIngredient);
+inputFilterIngredients.appendChild(divIngredientHidden);
+divIngredientHidden.appendChild(inputIngredient);
 inputFilterIngredients.appendChild(listIngredientRecipe);
 inputIngredient.insertAdjacentElement("afterend", arrowUpFilterIngredient);
 
@@ -239,68 +242,61 @@ filterIngredients();
 
 //function close filterIngredient
 const closeFilterIngredient = () => {
+  inputIngredient.value = "";
   filteringredients.style.display = "block";
   inputFilterIngredients.style.display = "none";
 };
 arrowUpFilterIngredient.addEventListener("click", closeFilterIngredient);
 let counterTag = 0;
+
 const tagResearchIngredients = () => {
-  let tagFilterForIngredient = [];
   Array.from(document.querySelectorAll(".liste-ingredients ")).forEach(
     (element) => {
       element.addEventListener("click", function (e) {
         const tagSection = document.querySelector(".tag");
+
         let tagIngredientLi = document.createElement("li");
         tagIngredientLi.setAttribute("class", "tag-ingredient");
         counterTag++;
 
         let spanIngredient = document.createElement("span");
-        let btnFermetureTag = document.createElement("i");
-        btnFermetureTag.setAttribute("class", "fa-regular fa-circle-xmark");
+        let btnTagIngredient = document.createElement("i");
+        btnTagIngredient.setAttribute("class", "fa-regular fa-circle-xmark");
         tagIngredientLi.textContent = e.target.textContent.toLowerCase();
         let tagDisplayIngredient = tagIngredientLi.textContent.toLowerCase();
-        const tags = Array.from(document.querySelectorAll(".tag-ingredient"));
-
-        tagSection.appendChild(tagIngredientLi);
-        tagIngredientLi.appendChild(spanIngredient);
-        tagIngredientLi.appendChild(btnFermetureTag);
-        closeFilterIngredient();
-
-        btnFermetureTag.addEventListener("click", () => {
-          tagIngredientLi.remove();
-          counterTag--;
-          updateDisplayTagIngredient();
-        });
-
-        //display ingredient with tag
-
-        tagFilterForIngredient = recipes.filter((recipe) =>
-          recipe.ingredients.some((ingredient) =>
-            ingredient.ingredient.toLowerCase().includes(tagDisplayIngredient)
-          )
-        );
-        displayDataRecipeAll(tagFilterForIngredient);
-      });
-
-      let updateDisplayTagIngredient = () => {
-        const tagsIngredients = Array.from(
+        const existingTags = Array.from(
           document.querySelectorAll(".tag-ingredient")
         );
-        if (counterTag === 0) {
-          displayDataRecipeAll(recipes);
-        } else {
-          tagFilterForIngredient = recipes.filter((recipe) =>
-            tagsIngredients.some((tag) =>
+        const isTagExists = existingTags.some(
+          (tag) => tag.textContent.toLowerCase() === tagDisplayIngredient
+        );
+        if (!isTagExists) {
+          tagSection.appendChild(tagIngredientLi);
+          tagIngredientLi.appendChild(spanIngredient);
+          tagIngredientLi.appendChild(btnTagIngredient);
+          closeFilterIngredient();
+
+          const btnCloseTagIngredient = () => {
+            tagIngredientLi.remove();
+            counterTag--;
+            updateDisplayTags();
+          };
+          btnTagIngredient.addEventListener("click", btnCloseTagIngredient);
+
+          //display ingredient with tag
+          const displayTagIngredient = () => {
+            const tagFilterForIngredient = recipes.filter((recipe) =>
               recipe.ingredients.some((ingredient) =>
                 ingredient.ingredient
                   .toLowerCase()
-                  .includes(tag.textContent.toLowerCase())
+                  .includes(tagDisplayIngredient)
               )
-            )
-          );
-          displayDataRecipeAll(tagFilterForIngredient);
+            );
+            displayDataRecipeAll(tagFilterForIngredient);
+          };
+          displayTagIngredient();
         }
-      };
+      });
     }
   );
 };
@@ -319,6 +315,8 @@ const sectionContainerAppliance = document.querySelector(
 );
 inputFilterAppliance.setAttribute("class", "appliance-hidden");
 inputFilterAppliance.style.display = "none";
+const divAppliancetHidden = document.createElement("div");
+divAppliancetHidden.setAttribute("class", "div-appliance-hidden");
 const arrowUpFilterAppliance = document.createElement("i");
 arrowUpFilterAppliance.setAttribute("class", "fa-solid fa-chevron-up arrow");
 
@@ -326,7 +324,8 @@ const listApplianceRecipe = document.createElement("div");
 listApplianceRecipe.setAttribute("class", "liste-appliance");
 
 sectionContainerAppliance.appendChild(inputFilterAppliance);
-inputFilterAppliance.appendChild(inputAppliance);
+inputFilterAppliance.appendChild(divAppliancetHidden);
+divAppliancetHidden.appendChild(inputAppliance);
 inputFilterAppliance.appendChild(listApplianceRecipe);
 inputAppliance.insertAdjacentElement("afterend", arrowUpFilterAppliance);
 
@@ -399,10 +398,12 @@ filterAppliances();
 
 //function close filterAppliance
 const closeFilterAppliance = () => {
+  inputAppliance.value = "";
   filterAppliance.style.display = "block";
   inputFilterAppliance.style.display = "none";
 };
 arrowUpFilterAppliance.addEventListener("click", closeFilterAppliance);
+
 const tagResearchAppliance = () => {
   Array.from(document.querySelectorAll(".liste-appliance ")).forEach(
     (element) => {
@@ -412,45 +413,41 @@ const tagResearchAppliance = () => {
         tagApplianceLi.setAttribute("class", "tag-appliance");
         counterTag++;
         let spanAppliance = document.createElement("span");
-        let btnFermetureTag = document.createElement("i");
-        btnFermetureTag.setAttribute("class", "fa-regular fa-circle-xmark");
+        let btnTagAppliance = document.createElement("i");
+        btnTagAppliance.setAttribute("class", "fa-regular fa-circle-xmark");
         tagApplianceLi.textContent = e.target.textContent;
         let tagDisplayAppliance = tagApplianceLi.textContent.toLowerCase();
         tagApplianceLi.textContent.toLocaleLowerCase();
-        tagSection.appendChild(tagApplianceLi);
-        tagApplianceLi.appendChild(spanAppliance);
-        tagApplianceLi.appendChild(btnFermetureTag);
-        closeFilterAppliance();
-        btnFermetureTag.addEventListener("click", () => {
-          tagApplianceLi.remove();
-          counterTag--;
-          updateDisplayTagAppliance();
-        });
-
-        //display appliance with tag
-        tagFilterForAppliance = recipes.filter((recipe) =>
-          recipe.appliance.toLowerCase().includes(tagDisplayAppliance)
-        );
-        displayDataRecipeAll(tagFilterForAppliance);
-      });
-      let updateDisplayTagAppliance = () => {
-        const tagsAppliance = Array.from(
+        const existingTags = Array.from(
           document.querySelectorAll(".tag-appliance")
         );
-        if (counterTag === 0) {
-          displayDataRecipeAll(recipes);
-        } else {
-          tagFilterForAppliance = recipes.filter((recipe) =>
-            tagsAppliance.some((tag) =>
-              recipe.appliance
-                .toLowerCase()
-                .includes(tag.textContent.toLowerCase())
-            )
-          );
+        const isTagExists = existingTags.some(
+          (tag) => tag.textContent.toLowerCase() === tagDisplayAppliance
+        );
+        if (!isTagExists) {
+          tagSection.appendChild(tagApplianceLi);
+          tagApplianceLi.appendChild(spanAppliance);
+          tagApplianceLi.appendChild(btnTagAppliance);
+          closeFilterAppliance();
 
-          displayDataRecipeAll(tagFilterForAppliance);
+          const btnCloseTagAppliance = () => {
+            tagApplianceLi.remove();
+            counterTag--;
+
+            updateDisplayTags();
+          };
+          btnTagAppliance.addEventListener("click", btnCloseTagAppliance);
+
+          //display appliance with tag
+          const displayTagApliance = () => {
+            const tagFilterForAppliance = recipes.filter((recipe) =>
+              recipe.appliance.toLowerCase().includes(tagDisplayAppliance)
+            );
+            displayDataRecipeAll(tagFilterForAppliance);
+          };
+          displayTagApliance();
         }
-      };
+      });
     }
   );
 };
@@ -469,6 +466,8 @@ const sectionContainerUstensils = document.querySelector(
 );
 inputFilterUstensils.setAttribute("class", "ustensils-hidden");
 inputFilterUstensils.style.display = "none";
+const divUstensilsHidden = document.createElement("div");
+divUstensilsHidden.setAttribute("class", "div-ustensils-hidden");
 const arrowUpFilterUstensils = document.createElement("i");
 arrowUpFilterUstensils.setAttribute("class", "fa-solid fa-chevron-up arrow");
 
@@ -476,7 +475,8 @@ let listUstensilsRecipe = document.createElement("div");
 listUstensilsRecipe.setAttribute("class", "liste-ustensils");
 
 sectionContainerUstensils.appendChild(inputFilterUstensils);
-inputFilterUstensils.appendChild(inputUstensils);
+inputFilterUstensils.appendChild(divUstensilsHidden);
+divUstensilsHidden.appendChild(inputUstensils);
 inputFilterUstensils.appendChild(listUstensilsRecipe);
 inputUstensils.insertAdjacentElement("afterend", arrowUpFilterUstensils);
 
@@ -550,6 +550,7 @@ filterUstensiles();
 
 //function close filterUstensils
 const closeFilterUstensils = () => {
+  inputUstensils.value = "";
   filterUstensils.style.display = "block";
   inputFilterUstensils.style.display = "none";
 };
@@ -564,49 +565,80 @@ const tagResearchUstensils = () => {
         tagUstensilsLi.setAttribute("class", "tag-ustensils");
         counterTag++;
         let spanUstensils = document.createElement("span");
-        let btnFermetureTag = document.createElement("i");
-        btnFermetureTag.setAttribute("class", "fa-regular fa-circle-xmark");
+        let btnTagUstensils = document.createElement("i");
+        btnTagUstensils.setAttribute("class", "fa-regular fa-circle-xmark");
         tagUstensilsLi.textContent = e.target.textContent;
         let tagDisplayUstensils = tagUstensilsLi.textContent.toLowerCase();
         tagUstensilsLi.textContent.toLocaleLowerCase();
-        tagSection.appendChild(tagUstensilsLi);
-        tagUstensilsLi.appendChild(spanUstensils);
-        tagUstensilsLi.appendChild(btnFermetureTag);
-
-        closeFilterUstensils();
-        btnFermetureTag.addEventListener("click", () => {
-          tagUstensilsLi.remove();
-          counterTag--;
-          updateDisplayTagUstensils();
-        });
-
-        //display ustensils with tag
-
-        tagFilterForUstensils = recipes.filter((recipe) =>
-          recipe.ustensils.includes(tagDisplayUstensils)
-        );
-
-        displayDataRecipeAll(tagFilterForUstensils);
-      });
-
-      let updateDisplayTagUstensils = () => {
-        const tagsUstensils = Array.from(
+        const existingTags = Array.from(
           document.querySelectorAll(".tag-ustensils")
         );
-        if (counterTag === 0) {
-          displayDataRecipeAll(recipes);
-        } else {
-          tagFilterForUstensils = recipes.filter((recipe) =>
-            tagsUstensils.some((tag) =>
-              recipe.ustensils.some((ustensil) =>
-                ustensil.toLowerCase().includes(tag.textContent.toLowerCase())
-              )
-            )
-          );
-          displayDataRecipeAll(tagFilterForUstensils);
+        const isTagExists = existingTags.some(
+          (tag) => tag.textContent.toLowerCase() === tagDisplayUstensils
+        );
+        if (!isTagExists) {
+          tagSection.appendChild(tagUstensilsLi);
+          tagUstensilsLi.appendChild(spanUstensils);
+          tagUstensilsLi.appendChild(btnTagUstensils);
+
+          closeFilterUstensils();
+
+          const btnCloseTagUstensils = () => {
+            tagUstensilsLi.remove();
+            counterTag--;
+
+            updateDisplayTags();
+          };
+          btnTagUstensils.addEventListener("click", btnCloseTagUstensils);
+
+          //display ustensils with tag
+          const displayTagUstensils = () => {
+            const tagFilterForUstensils = recipes.filter((recipe) =>
+              recipe.ustensils.includes(tagDisplayUstensils)
+            );
+
+            displayDataRecipeAll(tagFilterForUstensils);
+          };
+          displayTagUstensils();
         }
-      };
+      });
     }
   );
 };
 tagResearchUstensils();
+
+let updateDisplayTags = () => {
+  const tagsIngredients = Array.from(
+    document.querySelectorAll(".tag-ingredient")
+  );
+  const tagsAppliance = Array.from(document.querySelectorAll(".tag-appliance"));
+  const tagsUstensils = Array.from(document.querySelectorAll(".tag-ustensils"));
+
+  let filteredRecipes = recipes;
+
+  if (counterTag > 0) {
+    filteredRecipes = filteredRecipes.filter((recipe) => {
+      const ingredientMatch = tagsIngredients.some((tag) =>
+        recipe.ingredients.some((ingredient) =>
+          ingredient.ingredient
+            .toLowerCase()
+            .includes(tag.textContent.toLowerCase())
+        )
+      );
+
+      const applianceMatch = tagsAppliance.some((tag) =>
+        recipe.appliance.toLowerCase().includes(tag.textContent.toLowerCase())
+      );
+
+      const ustensilMatch = tagsUstensils.some((tag) =>
+        recipe.ustensils.some((utensil) =>
+          utensil.toLowerCase().includes(tag.textContent.toLowerCase())
+        )
+      );
+
+      return ingredientMatch || applianceMatch || ustensilMatch;
+    });
+  }
+
+  displayDataRecipeAll(filteredRecipes);
+};

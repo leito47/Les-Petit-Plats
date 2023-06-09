@@ -121,7 +121,7 @@ img {
 }
 .globale-ingredient-description {
   display: flex;
-  height: 115px;
+  height: 140px;
   padding: 16px 16px 30px;
   background-color: var(--background-color-description);
   gap: 8px;
@@ -159,24 +159,9 @@ span {
   max-height: 99px;
 }
 
-/* p {
-  width: 230px;
-
-  font-size: 0.8rem;
-  overflow: hidden;
-} */
-
 .liste-ingredients,
 .liste-appliance,
 .liste-ustensils {
-  /* display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  list-style: none;
-  padding: 0 10px; */
-
   display: grid;
   list-style: none;
   grid-template-columns: repeat(3, 1fr);
@@ -194,6 +179,7 @@ span {
   background-color: var(--ingredient-color);
   border: none;
   color: #ffffff;
+  outline: none;
 }
 .appliance,
 .input-appliance {
@@ -262,4 +248,11 @@ li {
 }
 .tag-ustensils {
   background-color: var(--ustensils-color);
+}
+.div-ingredient-hidden,
+.div-appliance-hidden,
+.div-ustensils-hidden {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

@@ -21,7 +21,7 @@ export const recipes = [
       {
         ingredient: "Sucre",
         quantity: 30,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Glaçons",
@@ -31,7 +31,7 @@ export const recipes = [
     description:
       "Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée",
     appliance: "Blender",
-    ustensils: ["cuillère à Soupe", "verres", "presse citron"],
+    ustensils: ["cuillère à soupe", "verres", "presse citron"],
   },
   {
     id: 2,
@@ -41,7 +41,7 @@ export const recipes = [
       {
         ingredient: "Thon Rouge (ou blanc)",
         quantity: 200,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Concombre",
@@ -60,7 +60,7 @@ export const recipes = [
         quantity: 5,
       },
       {
-        ingredient: "Lait de coco",
+        ingredient: "Lait de Coco",
         quantity: 100,
         unit: "ml",
       },
@@ -118,12 +118,12 @@ export const recipes = [
       {
         ingredient: "Riz blanc",
         quantity: 500,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Thon en miettes",
         quantity: 200,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Tomate",
@@ -136,7 +136,7 @@ export const recipes = [
       {
         ingredient: "Maïs",
         quantity: 300,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Vinaigrette",
@@ -162,7 +162,7 @@ export const recipes = [
       {
         ingredient: "Thon en miettes",
         quantity: 130,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Tomate",
@@ -176,7 +176,7 @@ export const recipes = [
       {
         ingredient: "gruyère râpé",
         quantity: 100,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Moutarde de Dijon",
@@ -215,7 +215,7 @@ export const recipes = [
       {
         ingredient: "Sucre en Poudre",
         quantity: 100,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Sucre vanillé",
@@ -241,7 +241,7 @@ export const recipes = [
       {
         ingredient: "Chocolat au lait",
         quantity: 300,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Crème liquide",
@@ -251,7 +251,7 @@ export const recipes = [
       {
         ingredient: "Beurre",
         quantity: "30",
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Fraise",
@@ -272,17 +272,17 @@ export const recipes = [
       {
         ingredient: "Noix",
         quantity: "180",
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Chocolat noir",
         quantity: 150,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Beurre",
         quantity: 120,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Oeuf",
@@ -291,12 +291,12 @@ export const recipes = [
       {
         ingredient: "Sucre en Poudre",
         quantity: "110",
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "farine",
         quantity: 90,
-        unit: "g",
+        unit: "grammes",
       },
     ],
     time: 60,
@@ -320,7 +320,7 @@ export const recipes = [
       {
         ingredient: "Fromage de chèvre",
         quantity: 150,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Vinaigre Balsamic",
@@ -360,7 +360,7 @@ export const recipes = [
       {
         ingredient: "Oignon",
         quantity: 300,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Vin blanc sec",
@@ -382,12 +382,12 @@ export const recipes = [
       {
         ingredient: "Tomates cerises",
         quantity: 250,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Mozzarella",
         quantity: 150,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Jambon de parme",
@@ -422,7 +422,7 @@ export const recipes = [
       {
         ingredient: "Rhubarbe",
         quantity: 160,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Pommes",
@@ -453,12 +453,12 @@ export const recipes = [
       {
         ingredient: "Mâche",
         quantity: 60,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Pommes de terre",
         quantity: 200,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Échalote",
@@ -493,7 +493,7 @@ export const recipes = [
       {
         ingredient: "Farine de blé noir",
         quantity: 130,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Oeuf",
@@ -502,7 +502,7 @@ export const recipes = [
       {
         ingredient: "Fromage à raclette",
         quantity: 300,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Oignon",
@@ -511,12 +511,12 @@ export const recipes = [
       {
         ingredient: "Beurre",
         quantity: 75,
-        unit: "g",
+        unit: "grammes",
       },
     ],
     time: 100,
     description:
-      "Mélanger la farine et les oeufs, faire fondre 25 g de beurre et ajouter à la pâte. Ajouter du sel. Laisser reposer 1 heure. Faire les galettes et laisser refroidir. Faire chauffer les saucisses avec du beurre et l'oignon. Enrouler les saucisses dans les crêpes avec une partie du fromage. Mettre le reste du fromage à raclette par dessus les crêpes. Passer four pendant 20 minutes",
+      "Mélanger la farine et les oeufs, faire fondre 25 grammes de beurre et ajouter à la pâte. Ajouter du sel. Laisser reposer 1 heure. Faire les galettes et laisser refroidir. Faire chauffer les saucisses avec du beurre et l'oignon. Enrouler les saucisses dans les crêpes avec une partie du fromage. Mettre le reste du fromage à raclette par dessus les crêpes. Passer four pendant 20 minutes",
     appliance: "Four",
     ustensils: ["poêle à frire", "couteau"],
   },
@@ -532,7 +532,7 @@ export const recipes = [
       {
         ingredient: "Farine",
         quantity: 250,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Lait",
@@ -542,12 +542,12 @@ export const recipes = [
       {
         ingredient: "Beurre salé",
         quantity: 30,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Chocolat au lait",
         quantity: 100,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Banane",
@@ -568,17 +568,17 @@ export const recipes = [
       {
         ingredient: "Tomate",
         quantity: 500,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Mozzarella",
         quantity: 250,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Pennes",
         quantity: 500,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Basilic",
@@ -605,7 +605,7 @@ export const recipes = [
       {
         ingredient: "Fraise",
         quantity: 500,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Pastèque",
@@ -677,7 +677,7 @@ export const recipes = [
       {
         ingredient: "Sucre glace",
         quantity: 30,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Banane",
@@ -698,22 +698,22 @@ export const recipes = [
       {
         ingredient: "Tagliatelles",
         quantity: 500,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Lardons",
         quantity: 150,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Crème fraîche",
         quantity: 200,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Parmesan",
         quantity: 100,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "huile d'olive",
@@ -735,7 +735,7 @@ export const recipes = [
       {
         ingredient: "Spaghettis",
         quantity: 400,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Oignon",
@@ -744,12 +744,12 @@ export const recipes = [
       {
         ingredient: "Coulis de tomate",
         quantity: 300,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Viande hachée 1% de matière grasse",
         quantity: 400,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Vin rouge",
@@ -766,7 +766,7 @@ export const recipes = [
     description:
       "Cuisiner la viande hachée dans une poêle à frire. Dans une autre faire cuire les oignons découpés en fins dés avec un peu de beurre. Ajouter du vin rouge. Mélanger les oignons avec la viande hachée. Faire cuire les pates le temps indiqué sur le paquet. Ajouter le coulis de tomates à la viande hachée. Une fois que les pates sont cuites, ajouter la crème fraîche à la viande hachée. Servir.",
     appliance: "Casserole",
-    ustensils: ["Cuillère en bois", "louche", "couteau"],
+    ustensils: ["cuillère en bois", "louche", "couteau"],
   },
   {
     id: 22,
@@ -776,17 +776,17 @@ export const recipes = [
       {
         ingredient: "Beurre",
         quantity: 160,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Chocolat noir",
         quantity: 200,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Farine",
         quantity: 50,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Oeuf",
@@ -795,7 +795,7 @@ export const recipes = [
       {
         ingredient: "Sucre",
         quantity: 150,
-        unit: "g",
+        unit: "grammes",
       },
     ],
     time: 30,
@@ -812,17 +812,17 @@ export const recipes = [
       {
         ingredient: "Pâte brisée",
         quantity: 200,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Lardons",
         quantity: 200,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Beurre",
         quantity: 30,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Oeuf",
@@ -853,12 +853,12 @@ export const recipes = [
       {
         ingredient: "Thon en miettes",
         quantity: 160,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Maïs",
         quantity: 60,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Tomate",
@@ -871,7 +871,7 @@ export const recipes = [
       {
         ingredient: "Macaronis",
         quantity: 300,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Mayonnaise",
@@ -893,22 +893,22 @@ export const recipes = [
       {
         ingredient: "Sucre",
         quantity: 100,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Beurre",
         quantity: 100,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Farine",
         quantity: 100,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Chocolat noir en pépites",
         quantity: 100,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Oeuf",
@@ -979,7 +979,7 @@ export const recipes = [
       {
         ingredient: "Beurre salé",
         quantity: 50,
-        unit: "g",
+        unit: "grammes",
       },
     ],
     time: 15,
@@ -1000,17 +1000,17 @@ export const recipes = [
       {
         ingredient: "Pommes de terre",
         quantity: 400,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Oseille",
         quantity: 75,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Beurre",
         quantity: 50,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Crème fraîche",
@@ -1020,7 +1020,7 @@ export const recipes = [
     ],
     time: 80,
     description:
-      "Émincer les blanc de poireaux et les faire chauffer dans 25 g de beurre. AJouter les pommes de terres coupées en morceaux. Ajouter l'eau et laisser mijoter pour 45 minutes. Chauffer l'oseille avec le beurre restant puis incorporer le tout. Mixez. Ajoutez la crème. Bon appetit.",
+      "Émincer les blanc de poireaux et les faire chauffer dans 25 grammes de beurre. AJouter les pommes de terres coupées en morceaux. Ajouter l'eau et laisser mijoter pour 45 minutes. Chauffer l'oseille avec le beurre restant puis incorporer le tout. Mixez. Ajoutez la crème. Bon appetit.",
     appliance: "Mixer",
     ustensils: ["casserole", "couteau"],
   },
@@ -1064,7 +1064,7 @@ export const recipes = [
       {
         ingredient: "Pois Cassé",
         quantity: 500,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Oignon",
@@ -1098,17 +1098,17 @@ export const recipes = [
       {
         ingredient: "Haricots verts",
         quantity: 150,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Petits poids",
         quantity: 100,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Lardons",
         quantity: 150,
-        unit: "g",
+        unit: "grammes",
       },
     ],
     time: 60,
@@ -1140,7 +1140,7 @@ export const recipes = [
       {
         ingredient: "Gruyère",
         quantity: 100,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Lait",
@@ -1157,7 +1157,7 @@ export const recipes = [
     description:
       "Beurrer les tranches de pain, ajouter entre 2 tranches de pain de mie 1 tranche d’emmental, une de blanc de dinde, et une autre d'emmental. Dans un récipient, mélanger le gruyère rappé avec le lait et la noix de muscade. Mettre sur les croque monsieur. Placer au four durant 10 minutes.",
     appliance: "Four",
-    ustensils: ["râpe à fromage", "cuillère à Soupe", "couteau"],
+    ustensils: ["râpe à fromage", "cuillère à soupe", "couteau"],
   },
   {
     id: 33,
@@ -1203,7 +1203,7 @@ export const recipes = [
       {
         ingredient: "Patate douce",
         quantity: 800,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Crème fraîche",
@@ -1240,7 +1240,7 @@ export const recipes = [
       {
         ingredient: "Beurre",
         quantity: 20,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Crème fraîche",
@@ -1290,7 +1290,7 @@ export const recipes = [
       {
         ingredient: "Gruyère",
         quantity: 40,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Maïzena",
@@ -1316,7 +1316,7 @@ export const recipes = [
       {
         ingredient: "Viande hachée",
         quantity: 600,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Huile d'olives",
@@ -1335,7 +1335,7 @@ export const recipes = [
       {
         ingredient: "Gruyère",
         quantity: 50,
-        unit: "g",
+        unit: "grammes",
       },
     ],
     time: 60,
@@ -1366,14 +1366,14 @@ export const recipes = [
       {
         ingredient: "Sucre roux",
         quantity: 75,
-        unit: "g",
+        unit: "grammes",
       },
     ],
     time: 20,
     description:
-      "Fouettez les oeufs, le sucre et le lait. tremper les tranches de pain. Le cuire au four pendant environ 10 minutes à 180°. Servir.",
+      "Fouettez les oeufs, le sucre et le lait. tremper les tranches de pain. Le cuire au four pendant environ 10 minutes à 180°. Servir",
     appliance: "Four",
-    ustensils: ["fouet", "bol", "Cuillère à Soupe"],
+    ustensils: ["fouet", "bol", "cuillère à soupe"],
   },
   {
     id: 39,
@@ -1387,17 +1387,17 @@ export const recipes = [
       {
         ingredient: "Farine",
         quantity: 100,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Beurre",
         quantity: 50,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Sucre roux",
         quantity: 80,
-        unit: "g",
+        unit: "grammes",
       },
     ],
     time: 40,
@@ -1449,7 +1449,7 @@ export const recipes = [
       {
         ingredient: "Chocolat noir",
         quantity: 100,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Sucre vanillé",
@@ -1471,7 +1471,7 @@ export const recipes = [
       {
         ingredient: "Chocolat",
         quantity: 200,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Oeuf",
@@ -1501,17 +1501,17 @@ export const recipes = [
       {
         ingredient: "Pâte brisée",
         quantity: 200,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Sucre",
         quantity: 150,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Beurre fondu",
         quantity: 100,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Oeuf",
@@ -1540,22 +1540,22 @@ export const recipes = [
       {
         ingredient: "Chocolat",
         quantity: 200,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Sucre",
         quantity: 100,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Beurre",
         quantity: 50,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "farine",
         quantity: 40,
-        unit: "g",
+        unit: "grammes",
       },
     ],
     time: 15,
@@ -1581,12 +1581,12 @@ export const recipes = [
       {
         ingredient: "Farine",
         quantity: 30,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Sucre",
         quantity: 80,
-        unit: "g",
+        unit: "grammes",
       },
     ],
     time: 30,
@@ -1603,12 +1603,12 @@ export const recipes = [
       {
         ingredient: "Farine",
         quantity: 250,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Sucre",
         quantity: 150,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Sucre vanillé",
@@ -1627,7 +1627,7 @@ export const recipes = [
       {
         ingredient: "Pruneaux",
         quantity: 100,
-        unit: "g",
+        unit: "grammes",
       },
     ],
     time: 60,
@@ -1644,17 +1644,17 @@ export const recipes = [
       {
         ingredient: "Jus de citron",
         quantity: 100,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Mascarpone",
         quantity: 250,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Sucre",
         quantity: 100,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Crème Fraîche",
@@ -1695,7 +1695,7 @@ export const recipes = [
       {
         ingredient: "Gruyère",
         quantity: 200,
-        unit: "g",
+        unit: "grammes",
       },
     ],
     time: 40,
@@ -1746,7 +1746,7 @@ export const recipes = [
       {
         ingredient: "Pâte feuilletée",
         quantity: 400,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Oeuf",
@@ -1755,17 +1755,17 @@ export const recipes = [
       {
         ingredient: "Poudre d'amendes",
         quantity: 500,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Beurre",
         quantity: 500,
-        unit: "g",
+        unit: "grammes",
       },
       {
         ingredient: "Sucre glace",
         quantity: 500,
-        unit: "g",
+        unit: "grammes",
       },
     ],
     time: 60,
