@@ -1,8 +1,6 @@
 import { recipes } from "/data/recipes.js";
 let getRecipesByName = [];
-// let tagFilterForIngredient = [];
-// let tagFilterForAppliance = [];
-// let tagFilterForUstensils = [];
+
 const displayDataRecipeAll = (recipes) => {
   const sectionRecipes = document.getElementById("recipes-cards");
   // Clear any existing HTML in the section
@@ -162,7 +160,7 @@ barResearch();
 const inputIngredient = document.createElement("input");
 inputIngredient.setAttribute("class", "ingredients");
 inputIngredient.setAttribute("placeholder", "Rechercher un ingrédient");
-
+inputIngredient.setAttribute("aria-label", "barre recherche ingredient");
 const filteringredients = document.querySelector(".ingredients");
 const inputFilterIngredients = document.createElement("div");
 const sectionContainerIngredient = document.querySelector(
@@ -174,7 +172,7 @@ const divIngredientHidden = document.createElement("div");
 divIngredientHidden.setAttribute("class", "div-ingredient-hidden");
 const arrowUpFilterIngredient = document.createElement("i");
 arrowUpFilterIngredient.setAttribute("class", "fa-solid fa-chevron-up arrow");
-
+arrowUpFilterIngredient.setAttribute("aria-label", "fleche haut");
 let listIngredientRecipe = document.createElement("div");
 listIngredientRecipe.setAttribute("class", "liste-ingredients");
 
@@ -262,6 +260,7 @@ const tagResearchIngredients = () => {
         let spanIngredient = document.createElement("span");
         let btnTagIngredient = document.createElement("i");
         btnTagIngredient.setAttribute("class", "fa-regular fa-circle-xmark");
+        btnTagIngredient.setAttribute("aria-label", "croix de fermeture");
         tagIngredientLi.textContent = e.target.textContent.toLowerCase();
         let tagDisplayIngredient = tagIngredientLi.textContent.toLowerCase();
         const existingTags = Array.from(
@@ -307,7 +306,7 @@ tagResearchIngredients();
 const inputAppliance = document.createElement("input");
 inputAppliance.setAttribute("class", "input-appliance");
 inputAppliance.setAttribute("placeholder", "Rechercher un appareil");
-
+inputAppliance.setAttribute("aria-label", "barre recherche appareils");
 const filterAppliance = document.getElementById("appliance");
 const inputFilterAppliance = document.createElement("div");
 const sectionContainerAppliance = document.querySelector(
@@ -319,7 +318,7 @@ const divAppliancetHidden = document.createElement("div");
 divAppliancetHidden.setAttribute("class", "div-appliance-hidden");
 const arrowUpFilterAppliance = document.createElement("i");
 arrowUpFilterAppliance.setAttribute("class", "fa-solid fa-chevron-up arrow");
-
+arrowUpFilterAppliance.setAttribute("aria-label", "fleche du haut");
 const listApplianceRecipe = document.createElement("div");
 listApplianceRecipe.setAttribute("class", "liste-appliance");
 
@@ -415,6 +414,7 @@ const tagResearchAppliance = () => {
         let spanAppliance = document.createElement("span");
         let btnTagAppliance = document.createElement("i");
         btnTagAppliance.setAttribute("class", "fa-regular fa-circle-xmark");
+        btnTagAppliance.setAttribute("aria-label", "croix de fermeture");
         tagApplianceLi.textContent = e.target.textContent;
         let tagDisplayAppliance = tagApplianceLi.textContent.toLowerCase();
         tagApplianceLi.textContent.toLocaleLowerCase();
@@ -458,6 +458,7 @@ tagResearchAppliance();
 const inputUstensils = document.createElement("input");
 inputUstensils.setAttribute("class", "input-ustensils");
 inputUstensils.setAttribute("placeholder", "Rechercher un ustensile");
+inputUstensils.setAttribute("aria-label", "barre recherche ustensiles");
 
 const filterUstensils = document.getElementById("ustensils");
 const inputFilterUstensils = document.createElement("div");
@@ -470,6 +471,7 @@ const divUstensilsHidden = document.createElement("div");
 divUstensilsHidden.setAttribute("class", "div-ustensils-hidden");
 const arrowUpFilterUstensils = document.createElement("i");
 arrowUpFilterUstensils.setAttribute("class", "fa-solid fa-chevron-up arrow");
+arrowUpFilterUstensils.setAttribute("aria-label", "fleche du haut");
 
 let listUstensilsRecipe = document.createElement("div");
 listUstensilsRecipe.setAttribute("class", "liste-ustensils");
@@ -567,6 +569,7 @@ const tagResearchUstensils = () => {
         let spanUstensils = document.createElement("span");
         let btnTagUstensils = document.createElement("i");
         btnTagUstensils.setAttribute("class", "fa-regular fa-circle-xmark");
+        btnTagUstensils.setAttribute("aria-label", "croix de fermeture");
         tagUstensilsLi.textContent = e.target.textContent;
         let tagDisplayUstensils = tagUstensilsLi.textContent.toLowerCase();
         tagUstensilsLi.textContent.toLocaleLowerCase();
