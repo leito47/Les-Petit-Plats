@@ -27,33 +27,46 @@
         <input
           class="researcher"
           id="researcher"
+          aria-label="barre de recherche"
           placeholder="Rechercher une recette"
         />
-        <i class="fa-solid fa-magnifying-glass loupe"></i>
+        <i
+          class="fa-solid fa-magnifying-glass loupe"
+          aria-label="loupe rechercher"
+        ></i>
       </section>
-      <section id="tag"></section>
-      <section id="filters">
+      <div id="error-message"></div>
+      <ul id="tag" class="tag"></ul>
+      <section id="filters" class="filters">
         <section class="container-ingredient" style="width: unset">
-          <div id="ingredients" class="ingredient" style="display: block">
+          <div id="ingredients" class="ingredients" style="display: block">
             <span>Ingrédients</span>
-            <i class="fa-solid fa-chevron-down arrow"></i>
+            <i
+              class="fa-solid fa-chevron-down arrow"
+              aria-label="fleche bas"
+            ></i>
           </div>
         </section>
-        <div style="width: unset">
-          <div id="appareils">
+        <section class="container-appliance" style="width: unset">
+          <div id="appliance" class="appliance" style="display: block">
             <span>Appareils</span>
-            <i class="fa-solid fa-chevron-down arrow"></i>
+            <i
+              class="fa-solid fa-chevron-down arrow"
+              aria-label="fleche bas"
+            ></i>
           </div>
-        </div>
-        <div style="width: unset">
-          <div id="ustensiles">
+        </section>
+        <section class="container-ustensils" style="width: unset">
+          <div id="ustensils" class="ustensils" style="display: block">
             <span>Ustensiles</span>
-            <i class="fa-solid fa-chevron-down arrow"></i>
-            <!-- <i class="fa-solid fa-chevron-up"></i> -->
+            <i
+              class="fa-solid fa-chevron-down arrow"
+              aria-label="fleche bas"
+            ></i>
           </div>
-        </div>
+        </section>
       </section>
-      <section id="recipes-cards"></section>
+      <section id="recipes-cards" class="recipes-cards"></section>
     </main>
     <script type="module" src="./data/recipes.js"></script>
     <script type="module" src="./scripts/pages/index.js"></script>
