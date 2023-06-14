@@ -104,6 +104,7 @@ const hideErrorMessage = () => {
   errorMessageContainer.classList.remove("show-error-message");
 };
 
+//principal barResearch
 const barResearch = () => {
   const inputBarResearch = document.querySelector(".researcher");
 
@@ -182,7 +183,7 @@ divIngredientHidden.appendChild(inputIngredient);
 inputFilterIngredients.appendChild(listIngredientRecipe);
 inputIngredient.insertAdjacentElement("afterend", arrowUpFilterIngredient);
 
-// function filterIngredient
+// function filterIngredient Onclick
 const filterIngredients = () => {
   filteringredients.addEventListener("click", () => {
     closeFilterAppliance();
@@ -191,6 +192,7 @@ const filterIngredients = () => {
     inputFilterIngredients.style.display = "block";
     listIngredientRecipe.innerHTML = "";
 
+    //add li if not existing to avoid duplicate
     let ingredientBarResearchRecipes = [];
     Array.from(document.querySelectorAll(".name-ingredient")).forEach(
       (element) => {
@@ -207,7 +209,7 @@ const filterIngredients = () => {
         }
       }
     );
-
+    //sort by alphabetical order the li
     let sortedList = Array.from(listIngredientRecipe.children).sort((a, b) =>
       a.textContent.localeCompare(b.textContent)
     );
@@ -217,12 +219,14 @@ const filterIngredients = () => {
     });
   });
 
+  //normalize to lowercase and remove accent in search in filterIngredient
   inputIngredient.addEventListener("input", () => {
     const normalizeString = (str) => {
       return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     };
     let value = normalizeString(inputIngredient.value).toLowerCase().trim();
 
+    //depending on the word written, it reduces the selection of words
     Array.from(listIngredientRecipe.children).forEach((liIngredient) => {
       let ingredientText = normalizeString(
         liIngredient.textContent
@@ -247,6 +251,7 @@ const closeFilterIngredient = () => {
 arrowUpFilterIngredient.addEventListener("click", closeFilterIngredient);
 let counterTag = 0;
 
+//add tag ingredients
 const tagResearchIngredients = () => {
   Array.from(document.querySelectorAll(".liste-ingredients ")).forEach(
     (element) => {
@@ -269,6 +274,8 @@ const tagResearchIngredients = () => {
         const isTagExists = existingTags.some(
           (tag) => tag.textContent.toLowerCase() === tagDisplayIngredient
         );
+
+        //check if existing tag to avoid duplicate
         if (!isTagExists) {
           tagSection.appendChild(tagIngredientLi);
           tagIngredientLi.appendChild(spanIngredient);
@@ -328,7 +335,7 @@ divAppliancetHidden.appendChild(inputAppliance);
 inputFilterAppliance.appendChild(listApplianceRecipe);
 inputAppliance.insertAdjacentElement("afterend", arrowUpFilterAppliance);
 
-// function filterAppliance
+// function filterAppliance Onclick
 const filterAppliances = () => {
   filterAppliance.addEventListener("click", () => {
     closeFilterIngredient();
@@ -337,6 +344,7 @@ const filterAppliances = () => {
     inputFilterAppliance.style.display = "block";
     listApplianceRecipe.innerHTML = "";
 
+    //add li if not existing to avoid duplicate
     let applianceBarResearchRecipes = [];
     Array.from(document.querySelectorAll(".title-recipe")).forEach(
       (element) => {
@@ -363,7 +371,7 @@ const filterAppliances = () => {
       liAppliance.textContent = el;
       listApplianceRecipe.appendChild(liAppliance);
     });
-
+    //sort by alphabetical order the li
     let sortedListAppliance = Array.from(listApplianceRecipe.children).sort(
       (a, b) => a.textContent.localeCompare(b.textContent)
     );
@@ -373,12 +381,14 @@ const filterAppliances = () => {
     });
   });
 
+  //normalize to lowercase and remove accent in search in filterAppliance
   inputAppliance.addEventListener("input", () => {
     const normalizeString = (str) => {
       return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     };
     let value = normalizeString(inputAppliance.value).toLowerCase().trim();
 
+    //depending on the word written, it reduces the selection of words
     Array.from(listApplianceRecipe.children).forEach((liAppliance) => {
       let applianceText = normalizeString(
         liAppliance.textContent
@@ -403,6 +413,7 @@ const closeFilterAppliance = () => {
 };
 arrowUpFilterAppliance.addEventListener("click", closeFilterAppliance);
 
+//add tag appliance
 const tagResearchAppliance = () => {
   Array.from(document.querySelectorAll(".liste-appliance ")).forEach(
     (element) => {
@@ -424,6 +435,8 @@ const tagResearchAppliance = () => {
         const isTagExists = existingTags.some(
           (tag) => tag.textContent.toLowerCase() === tagDisplayAppliance
         );
+
+        //check if existing tag to avoid duplicate
         if (!isTagExists) {
           tagSection.appendChild(tagApplianceLi);
           tagApplianceLi.appendChild(spanAppliance);
@@ -482,7 +495,7 @@ divUstensilsHidden.appendChild(inputUstensils);
 inputFilterUstensils.appendChild(listUstensilsRecipe);
 inputUstensils.insertAdjacentElement("afterend", arrowUpFilterUstensils);
 
-// function filterUstensils
+// function filterUstensils Onclick
 const filterUstensiles = () => {
   filterUstensils.addEventListener("click", () => {
     closeFilterIngredient();
@@ -492,7 +505,7 @@ const filterUstensiles = () => {
     listUstensilsRecipe.innerHTML = "";
 
     let ustensilsBarResearchRecipes = new Set();
-
+    //add li if not existing to avoid duplicate
     Array.from(document.querySelectorAll(".title-recipe")).forEach(
       (element) => {
         let nameRecipeForUstensils = element.textContent
@@ -521,6 +534,7 @@ const filterUstensiles = () => {
       listUstensilsRecipe.appendChild(liUstensils);
     });
 
+    //sort by alphabetical order the li
     let sortedListUstensils = Array.from(listUstensilsRecipe.children).sort(
       (a, b) => a.textContent.localeCompare(b.textContent)
     );
@@ -529,12 +543,15 @@ const filterUstensiles = () => {
       listUstensilsRecipe.appendChild(liUstensils);
     });
   });
+
+  //normalize to lowercase and remove accent in search in filterUstensils
   inputUstensils.addEventListener("input", () => {
     const normalizeString = (str) => {
       return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     };
     let value = normalizeString(inputUstensils.value).toLowerCase().trim();
 
+    //depending on the word written, it reduces the selection of words
     Array.from(listUstensilsRecipe.children).forEach((liUstensils) => {
       let ustensilsText = normalizeString(
         liUstensils.textContent
@@ -558,6 +575,7 @@ const closeFilterUstensils = () => {
 };
 arrowUpFilterUstensils.addEventListener("click", closeFilterUstensils);
 
+//add tag ustensils
 const tagResearchUstensils = () => {
   Array.from(document.querySelectorAll(".liste-ustensils ")).forEach(
     (element) => {
@@ -579,6 +597,8 @@ const tagResearchUstensils = () => {
         const isTagExists = existingTags.some(
           (tag) => tag.textContent.toLowerCase() === tagDisplayUstensils
         );
+
+        //check if existing tag to avoid duplicate
         if (!isTagExists) {
           tagSection.appendChild(tagUstensilsLi);
           tagUstensilsLi.appendChild(spanUstensils);
@@ -610,6 +630,7 @@ const tagResearchUstensils = () => {
 };
 tagResearchUstensils();
 
+//according to the tags chosen redisplays me the recipes and updates me the ingredients appliances and utensils
 let updateDisplayTags = () => {
   const tagsIngredients = Array.from(
     document.querySelectorAll(".tag-ingredient")
