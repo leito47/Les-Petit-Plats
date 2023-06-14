@@ -34,6 +34,17 @@ img {
   width: 100%;
 }
 
+li {
+  padding: 10px;
+}
+article {
+  width: 366px;
+}
+span {
+  font-size: 12px;
+}
+
+/* barResearch */
 .research {
   display: flex;
   justify-content: space-between;
@@ -43,6 +54,7 @@ img {
   margin-bottom: 20px;
 }
 
+/* input barResearch */
 .researcher {
   width: 95%;
   font-family: "Lato", sans-serif;
@@ -56,6 +68,8 @@ img {
   background-color: var(--background-color-description);
   outline: none;
 }
+
+/* section set filter*/
 .filters {
   display: flex;
   margin-bottom: 20px;
@@ -63,62 +77,62 @@ img {
   font-family: "Lato";
   margin-top: 20px;
 }
-.ingredients {
+
+/* div ingredients */
+.ingredients,
+.appliance,
+.ustensils {
   padding: 15px 10px;
   border-radius: 5px;
   background-color: var(--ingredient-color);
   color: #ffffff;
   border-color: var(--ingredient-color);
 }
+
+/* div appliance */
 .appliance {
-  padding: 15px 10px;
-  border-radius: 5px;
   background-color: var(--appareils-color);
-  color: #ffffff;
-}
-.ustensils {
-  padding: 15px 10px;
-  border-radius: 5px;
-  background-color: var(--ustensils-color);
-  color: #ffffff;
 }
 
+/* div ustensils */
+.ustensils {
+  background-color: var(--ustensils-color);
+}
+
+/* array of all recipes */
 .recipes-cards {
   display: flex;
   flex-wrap: wrap;
-  /* margin-top: 55px; */
   gap: 40px;
 }
+
+/* field image */
 .blank-image {
   height: 180px;
   background-color: var(--background-color-blank-img);
 }
-.title-recipe {
-  width: 220px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
+
+/* title card of recipe */
 .title-recipe h2 {
+  width: 220px;
   font-size: 1.1rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
+/* div global with title and timer */
 .ingredient-time {
   display: flex;
   justify-content: space-between;
   padding: 1.4rem;
+  background-color: var(--background-color-description);
 }
+
+/* div time  */
 .time-recipe {
   display: flex;
   gap: 10px;
 }
 
-.recipe {
-  width: 365px;
-}
+/* div global ingredient, commentory  */
 .globale-ingredient-description {
   display: flex;
   height: 140px;
@@ -127,28 +141,27 @@ img {
   gap: 8px;
   justify-content: space-between;
 }
+
+/* div for ingredients  */
 .ingredients-recipe {
   width: 190px;
-
   overflow: hidden;
 }
-.ingredient-time {
-  background-color: var(--background-color-description);
-}
 
+/* span name ingredients  */
 .name-ingredient {
   font-size: 12px;
   font-weight: 700;
 }
 
-span {
-  font-size: 12px;
-}
+/* span ingredients quantity  */
 .ingredient-quantity {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
+
+/* p description-commentary  */
 .description-commentary {
   font-size: 0.8rem;
   width: 170px;
@@ -159,6 +172,7 @@ span {
   max-height: 99px;
 }
 
+/* list ingredient, appliance, ustensils  */
 .liste-ingredients,
 .liste-appliance,
 .liste-ustensils {
@@ -168,11 +182,15 @@ span {
   padding: 20px;
   cursor: pointer;
 }
+
+/*  hover on list ingredient, appliance, ustensils  */
 .liste-ingredients li:hover,
 .liste-appliance li:hover,
 .liste-ustensils li:hover {
   opacity: 0.5;
 }
+
+/*  input  ingredient, appliance, ustensils  */
 .ingredients,
 .input-appliance,
 .input-ustensils {
@@ -181,22 +199,27 @@ span {
   color: #ffffff;
   outline: none;
 }
+
+/*  color of input and div   appliance  */
 .appliance,
 .input-appliance {
   background-color: var(--appareils-color);
 }
+
+/*  color of input and div  ustensils  */
 .ustensils,
 .input-ustensils {
   background-color: var(--ustensils-color);
 }
+
+/*  color of placeholder   */
 .ingredients::placeholder,
 .input-appliance::placeholder,
 .input-ustensils::placeholder {
   color: #ffffff;
 }
-.fa-solid {
-  color: #ffffff;
-}
+
+/* display for ingredient-hidden, appliance-hidden, ustensils-hidden   */
 .ingredient-hidden,
 .appliance-hidden,
 .ustensils-hidden {
@@ -205,27 +228,34 @@ span {
   background-color: var(--ingredient-color);
   color: #ffffff;
 }
+
+/*  color of div appliance-hidden   */
 .appliance-hidden {
   background-color: var(--appareils-color);
 }
+
+/*  color of div ustensils-hidden   */
 .ustensils-hidden {
   background-color: var(--ustensils-color);
 }
+
+/*  color of magnify  */
 .loupe {
   color: #000000;
 }
 .arrow {
   cursor: pointer;
 }
-li {
-  padding: 10px;
-}
+
+/*   ul tag */
 .tag {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
   gap: 1.2rem;
 }
+
+/*  generality display ul tag-ingredient, tag-appliance, tag-ustensils*/
 .tag-ingredient,
 .tag-appliance,
 .tag-ustensils {
@@ -236,9 +266,18 @@ li {
   border: none;
   border-radius: 5px;
 }
+
+/*  color  ul tag-appliance*/
 .tag-appliance {
   background-color: var(--appareils-color);
 }
+
+/*  color  ul tag-ustensils*/
+.tag-ustensils {
+  background-color: var(--ustensils-color);
+}
+
+/*  cross close tag*/
 .tag-ingredient i,
 .tag-appliance i,
 .tag-ustensils i {
@@ -246,9 +285,8 @@ li {
   padding-left: 12px;
   padding-top: 3px;
 }
-.tag-ustensils {
-  background-color: var(--ustensils-color);
-}
+
+/*  global div include placeholder and arrow in filter elements*/
 .div-ingredient-hidden,
 .div-appliance-hidden,
 .div-ustensils-hidden {
