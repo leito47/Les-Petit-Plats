@@ -277,7 +277,8 @@ span {
   background-color: var(--ustensils-color);
 }
 
-/*  cross close tag*/
+/*  cross close tag
+*/
 .tag-ingredient i,
 .tag-appliance i,
 .tag-ustensils i {
