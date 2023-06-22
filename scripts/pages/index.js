@@ -110,11 +110,21 @@ const barResearch = () => {
   const normalizeString = (str) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   };
-  // inputBarResearch.addEventListener("focus", () => {
-  //   closeFilterIngredient();
-  //   closeFilterAppliance();
-  //   closeFilterUstensils();
-  // });
+
+  const closeFilters = () => {
+    const filters = ["Ingredient", "Appliance", "Ustensils"];
+    for (let i = 0; i < filters.length; i++) {
+      const filter = filters[i];
+      const closeFilterFunction = window[`closeFilter${filter}`];
+      if (typeof closeFilterFunction === "function") {
+        closeFilterFunction();
+      }
+    }
+  };
+
+  inputBarResearch.addEventListener("focus", () => {
+    closeFilters();
+  });
 
   inputBarResearch.addEventListener("keyup", (e) => {
     let inputTargetResearch = normalizeString(e.target.value)
@@ -122,37 +132,42 @@ const barResearch = () => {
       .trim();
 
     if (inputTargetResearch.length > 2) {
+      const getRecipesByName = [];
       for (let i = 0; i < recipes.length; i++) {
-        let recipe = recipes[i];
-        let recipeName = normalizeString(recipe.name).toLowerCase();
+        const recipe = recipes[i];
+        const normalizedRecipeName = normalizeString(recipe.name).toLowerCase();
+        const normalizedAppliance = normalizeString(
+          recipe.appliance
+        ).toLowerCase();
 
-        if (recipeName.includes(inputTargetResearch)) {
+        if (
+          normalizedRecipeName.includes(inputTargetResearch) ||
+          normalizedAppliance.includes(inputTargetResearch)
+        ) {
           getRecipesByName.push(recipe);
-        }
+        } else {
+          const ingredients = recipe.ingredients;
+          const ustensils = recipe.ustensils;
 
-        let ingredients = recipe.ingredients;
-        for (let j = 0; j < ingredients.length; j++) {
-          let ingredient = ingredients[j].ingredient;
-          let normalizedIngredient = normalizeString(ingredient).toLowerCase();
+          for (let j = 0; j < ingredients.length; j++) {
+            const ingredient = ingredients[j].ingredient;
+            const normalizedIngredient =
+              normalizeString(ingredient).toLowerCase();
 
-          if (normalizedIngredient.includes(inputTargetResearch)) {
-            getRecipesByName.push(recipe);
+            if (normalizedIngredient.includes(inputTargetResearch)) {
+              getRecipesByName.push(recipe);
+              break;
+            }
           }
-        }
 
-        let appliance = normalizeString(recipe.appliance).toLowerCase();
-        if (appliance.includes(inputTargetResearch)) {
-          getRecipesByName.push(recipe);
-          // continue;
-        }
+          for (let k = 0; k < ustensils.length; k++) {
+            const ustensil = ustensils[k];
+            const normalizedUstensil = normalizeString(ustensil).toLowerCase();
 
-        let ustensils = recipe.ustensils;
-        for (let k = 0; k < ustensils.length; k++) {
-          let ustensil = ustensils[k];
-          let normalizedUstensil = normalizeString(ustensil).toLowerCase();
-
-          if (normalizedUstensil.includes(inputTargetResearch)) {
-            getRecipesByName.push(recipe);
+            if (normalizedUstensil.includes(inputTargetResearch)) {
+              getRecipesByName.push(recipe);
+              break;
+            }
           }
         }
       }
